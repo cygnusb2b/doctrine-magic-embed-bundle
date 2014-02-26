@@ -61,6 +61,9 @@ class AnnotationDriver
                 }
             }
         }
+
+        // Handle method annotations
+        
         return $metadata;
     }
 

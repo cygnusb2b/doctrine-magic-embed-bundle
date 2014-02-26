@@ -3,6 +3,7 @@ namespace Cygnus\DoctrineMagicEmbedBundle\Mapping;
 
 use Cygnus\DoctrineMagicEmbedBundle\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory as FactoryInterface;
+use Doctrine\Common\Persistence\Mapping\RuntimeReflectionService;
 
 class ClassMetadataFactory implements FactoryInterface
 {
@@ -12,6 +13,8 @@ class ClassMetadataFactory implements FactoryInterface
     private $loadedMetadata = array();
 
     private $cacheDriver = false;
+
+    private $reflectionService;
 
     public function __construct(AnnotationDriver $driver)
     {
@@ -64,7 +67,8 @@ class ClassMetadataFactory implements FactoryInterface
             // Attempt to retrieve metadata from cache
         } else {
             // Load metadata for this class
-            return $this->loadMetadata($className);
+            $this->loadMetadata($className);
+            return $this->loadedMetadata[$className];
         }
 
     }
@@ -78,9 +82,43 @@ class ClassMetadataFactory implements FactoryInterface
      */
     protected function loadMetadata($className)
     {
-        $metadata = $this->newClassMetadataInstance($className);
+        
 
-        return $this->driver->loadMetadataForClass($metadata->getName(), $metadata);
+        $parentClasses = $this->getParentClasses($className);
+        $parentClasses[] = $className;
+
+        foreach ($parentClasses as $className) {
+            // if (isset($this->loadedMetadata[$className])) {
+            //     $parent = $this->loadedMetadata[$className];
+            //     if ($this->isEntity($parent)) {
+            //         $rootEntityFound = true;
+            //         array_unshift($visited, $className);
+            //     }
+            //     continue;
+            // }
+
+            $metadata = $this->newClassMetadataInstance($className);
+            $this->driver->loadMetadataForClass($metadata->getName(), $metadata);
+
+
+            // $this->initializeReflection($class, $reflService);
+
+            // $this->doLoadMetadata($class, $parent, $rootEntityFound, $visited);
+
+            $this->loadedMetadata[$className] = $metadata;
+
+            // $parent = $class;
+
+            // if ($this->isEntity($class)) {
+            //     $rootEntityFound = true;
+            //     array_unshift($visited, $className);
+            // }
+
+            // $this->wakeupReflection($class, $reflService);
+
+            $loaded[] = $className;
+        }
+        return $loaded;
     }
 
     /**
@@ -116,6 +154,36 @@ class ClassMetadataFactory implements FactoryInterface
     public function setMetadataFor($className, $class)
     {
 
+    }
+
+    /**
+     * Gets an array of parent classes for the given entity class.
+     *
+     * @param string $name
+     *
+     * @return array
+     */
+    protected function getParentClasses($className)
+    {
+        // Collect parent classes, ignoring transient (not-mapped) classes.
+        $parentClasses = array();
+        foreach (array_reverse($this->getReflectionService()->getParentClasses($className)) as $parentClass) {
+            $parentClasses[] = $parentClass;
+        }
+        return $parentClasses;
+    }
+
+    /**
+     * Gets the reflection service associated with this metadata factory.
+     *
+     * @return ReflectionService
+     */
+    public function getReflectionService()
+    {
+        if ($this->reflectionService === null) {
+            $this->reflectionService = new RuntimeReflectionService();
+        }
+        return $this->reflectionService;
     }
 
     /**
