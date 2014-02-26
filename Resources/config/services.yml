@@ -1,7 +1,11 @@
 parameters:
-#    cygnus_doctrine_magic_embed.example.class: Cygnus\DoctrineMagicEmbedBundle\Example
+    cygnus_doctrine_magic_embed.annotation.driver.class: Cygnus\DoctrineMagicEmbedBundle\Mapping\Driver\AnnotationDriver
+    cygnus_doctrine_magic_embed.metadata.factory.class: Cygnus\DoctrineMagicEmbedBundle\Mapping\ClassMetadataFactory
 
 services:
-#    cygnus_doctrine_magic_embed.example:
-#        class: %cygnus_doctrine_magic_embed.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    cygnus_doctrine_magic_embed.annotation.driver:
+        class: %cygnus_doctrine_magic_embed.annotation.driver.class%
+        arguments: [@annotation_reader]
+    cygnus_doctrine_magic_embed.metadata.factory:
+        class: %cygnus_doctrine_magic_embed.metadata.factory.class%
+        arguments: [@cygnus_doctrine_magic_embed.annotation.driver]

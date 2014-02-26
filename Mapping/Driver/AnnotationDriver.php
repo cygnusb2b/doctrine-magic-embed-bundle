@@ -1,17 +1,34 @@
 <?php
 namespace Cygnus\DoctrineMagicEmbedBundle\Mapping\Driver;
 
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver as AbstractAnnotationDriver;
-
+use Cygnus\DoctrineMagicEmbedBundle\Mapping\ClassMetadata;
 use Cygnus\DoctrineMagicEmbedBundle\Mapping\Annotations as MagicEmbed;
+use Doctrine\Common\Annotations\Reader;
 
 /**
  * The AnnotationDriver reads the mapping metadata from docblock annotations.
  *
  */
-class AnnotationDriver extends AbstractAnnotationDriver
+class AnnotationDriver
 {
+
+    /**
+     * The AnnotationReader.
+     *
+     * @var AnnotationReader
+     */
+    protected $reader;
+
+    /**
+     * Initializes a new AnnotationDriver that uses the given AnnotationReader for reading annotations
+     *
+     * @param Reader $reader The AnnotationReader to use
+     */
+    public function __construct(Reader $reader)
+    {
+        $this->reader = $reader;
+    }
+
     /**
      * Loads the metadata for the specified class into the provided container.
      *
