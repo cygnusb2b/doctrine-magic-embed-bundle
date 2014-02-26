@@ -1,0 +1,20 @@
+{
+    "name": "cygnus/doctrine-magic-embed-bundle",
+    "description": "A Symfony2 bundle to support embedding a version of a first-class managed document",
+    "require": {
+        "doctrine/mongodb-odm": "1.0.*@dev",
+        "doctrine/mongodb-odm-bundle": "3.0.*@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Josh Worden",
+            "email": "josh.worden@cygnus.com"
+        },
+    {
+        "name": "Jacob Bare",
+        "email": "jacob.bare@cygnus.com"
+    }
+    ],
+    "minimum-stability": "dev"
+}
