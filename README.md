@@ -1,7 +1,7 @@
 Doctrine Magic Embed
 ====================
 
-This bundle supports embedding a version of a first-clas managed document in Doctrine documents.
+This bundle supports embedding a version of a first-class managed document in Doctrine documents.
 
 [![Build Status](https://travis-ci.org/cygnusb2b/doctrine-magic-embed-bundle.png?branch=master)](https://travis-ci.org/cygnusb2b/doctrine-magic-embed-bundle)
 
