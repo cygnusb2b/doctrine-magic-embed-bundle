@@ -39,7 +39,29 @@ class AnnotationDriver
      */
     public function loadMetadataForClass($className, ClassMetadata $metadata) 
     {
+        $reflClass = $metadata->getReflectionClass();
+        
+        // Handle class annotations
+        $classAnnotations = $this->reader->getClassAnnotations($reflClass);
+        foreach ($classAnnotations as $annotation) {
 
+        }
+
+        // Handle property annotations
+        foreach ($reflClass->getProperties() as $property) {
+            $propertyAnnotations = $this->reader->getPropertyAnnotations($property);
+
+            $mapping = array('fieldName' => $property->getName());
+
+            foreach ($propertyAnnotations as $annotation) {
+                if ($annotation instanceof MagicEmbed\Expose) {
+                    $mapping = array_replace($mapping, (array) $annotation);
+
+                    $metadata->setExposedField($mapping);
+                }
+            }
+        }
+        return $metadata;
     }
 
     /**

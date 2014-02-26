@@ -60,6 +60,15 @@ class ClassMetadata implements ClassMetadataInterface
         return $this->name;
     }
 
+    public function setExposedField(array $mapping)
+    {
+        if ($this->reflClass->hasProperty($mapping['fieldName'])) {
+            $reflProp = $this->reflClass->getProperty($mapping['fieldName']);
+            $reflProp->setAccessible(true);
+            $this->reflFields[$mapping['fieldName']] = $reflProp;
+        }
+    }
+
     /**
      * Gets the namespace for this mapped class.
      *
