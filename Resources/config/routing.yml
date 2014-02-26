@@ -1,0 +1,3 @@
+cygnus_doctrine_magic_embed_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: CygnusDoctrineMagicEmbedBundle:Default:index }
