@@ -12,7 +12,6 @@ class ClassMetadata implements ClassMetadataInterface
      * READ-ONLY: The namespace the document class is contained in.
      *
      * @var string
-     * @todo Not really needed. Usage could be localized.
      */
     public $namespace;
 
