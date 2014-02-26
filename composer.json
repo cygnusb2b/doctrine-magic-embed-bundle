@@ -5,16 +5,24 @@
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/mongodb-odm-bundle": "3.0.*@dev"
     },
+    "autoload":
+    {
+        "psr-0":
+        {
+            "Cygnus\\": ""
+        }
+    },
+    "target-dir": "Cygnus/DoctrineMagicEmbedBundle",
     "license": "MIT",
     "authors": [
         {
             "name": "Josh Worden",
             "email": "josh.worden@cygnus.com"
         },
-    {
-        "name": "Jacob Bare",
-        "email": "jacob.bare@cygnus.com"
-    }
+        {
+            "name": "Jacob Bare",
+            "email": "jacob.bare@cygnus.com"
+        }
     ],
     "minimum-stability": "dev"
 }
