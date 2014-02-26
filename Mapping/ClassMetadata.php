@@ -29,6 +29,8 @@ class ClassMetadata implements ClassMetadataInterface
      */
     public $reflFields = array();
 
+    public $fieldMappings = array();
+
     /**
      * The prototype from which new instances of the mapped class are created.
      *
@@ -61,6 +63,8 @@ class ClassMetadata implements ClassMetadataInterface
 
     public function setExposedField(array $mapping)
     {
+        $this->fieldMappings[$mapping['fieldName']] = $mapping;
+
         if ($this->reflClass->hasProperty($mapping['fieldName'])) {
             $reflProp = $this->reflClass->getProperty($mapping['fieldName']);
             $reflProp->setAccessible(true);
