@@ -39,17 +39,25 @@ To utilize the MagicEmbed service, you need to make two changes to your document
 2. Define the fields that should be embedded on parent documents.
 
 ```php
-    <?php
-    namespace Acme\Document;
-    use Cygnus\DoctrineMagicEmbedBundle\Mapping\Annotations as MagicEmbed;
-    class Taxonomy {
-        /**
-         * @MagicEmbed\Expose
-         */
-        protected $name;
-        protected $id;
-        // ...
+<?php
+    
+namespace Acme\Document;
+
+use Cygnus\DoctrineMagicEmbedBundle\Mapping\Annotations as MagicEmbed;
+
+class Taxonomy {
+
+    /**
+     * @MagicEmbed\Expose
+     */
+    protected $name;
+
+    protected $id;
+
+    // ...
+
     }
+
 ```
     
 Now, when you embed this Taxonomy document into another managed document, the 'name'
