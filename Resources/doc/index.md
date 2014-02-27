@@ -10,26 +10,28 @@ Installation
 ------------
 You can install this bundle using composer
 
-.. code-block :: bash
-
-    composer require cygnus/doctrine-magic-embed-bundle
+```bash
+composer require cygnus/doctrine-magic-embed-bundle
+```
 
 or add the package to your ``composer.json`` file directly.
 
 After you have installed the package, you just need to add the bundle to your ``AppKernel.php`` file::
 
-    // in AppKernel::registerBundles()
-    $bundles = array(
-        // ...
-        new Cygnus\DoctrineMagicEmbed\CygnusDoctrineMagicEmbedBundle(),
-        // ...
-    );
+```php
+// in AppKernel::registerBundles()
+$bundles = array(
+    // ...
+    new Cygnus\DoctrineMagicEmbed\CygnusDoctrineMagicEmbedBundle(),
+    // ...
+);
+```
 
 Configuration
 -------------
 DoctrineMagicEmbedBundle requires no initial configuration.
 
-For all available configuration options, please see the :doc:`configuration documentation <configuration>`.
+For all available configuration options, please see the [configuration documentation](configuration.md).
 
 Usage
 -----
@@ -45,6 +47,9 @@ namespace Acme\Document;
 
 use Cygnus\DoctrineMagicEmbedBundle\Mapping\Annotations as MagicEmbed;
 
+/**
+ * @MagicEmbed\IsEmbeddable
+ */
 class Taxonomy {
 
     /**
@@ -56,12 +61,14 @@ class Taxonomy {
 
     // ...
 
-    }
+}
 
 ```
     
 Now, when you embed this Taxonomy document into another managed document, the 'name'
 field will be persisted as an embedded document.
 
-For more details, check out the :doc:`configuration <configuration>` 
-and :doc:`examples <examples>` documentation.
+---
+
+For more details, check out the [configuration](configuration.md) 
+and [examples](examples.md) documentation.
