@@ -27,4 +27,4 @@ This bundle attempts to remedy that problem by providing three things:
 
 ### Status
 
-This bundle is currently under active development, and no stable release is yet available. If you're interested in learning more or contributing, feel free to check out the documentation or the [wiki](https://github.com/cygnusb2b/doctrine-magic-embed-bundle/wiki).
+This bundle is currently under active development, and no stable release is yet available. If you're interested in learning more or contributing, feel free to check out the [documentation](Resources/doc/index.md) or the [wiki](https://github.com/cygnusb2b/doctrine-magic-embed-bundle/wiki).
